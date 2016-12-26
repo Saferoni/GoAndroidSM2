@@ -11,9 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-// что нудно накидать
-//SheredPerf есть в 5 ДЗ
-
 //Вариант№6. Концерт по заявкам
 //Разработать систему для формирования программы концерта по заявкам.
 // Пользователи (фанаты) регистрируются в системе и выбирают песни из предложенного списка ((*)
@@ -55,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 isLogin();
             }
         }
+
         //обработка логина
         public void needLogin(){
             layoutLogin.setVisibility(View.VISIBLE);
@@ -76,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+
     // Залогинениый пользователь
     public void isLogin(){
         layoutApp.setVisibility(View.VISIBLE);

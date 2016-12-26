@@ -55,11 +55,8 @@ public class Activity2 extends AppCompatActivity {
                 }
             }
         });
-        // используем адаптер данных для наполнения аррай листа пока TODO не работает
-        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arraySongs);
-        //listView.setAdapter(adapter);
     }
-
+    
     // обработка кнопки методом, вызывается из кнопки сохранить добавляет выбранную песню в лист
     public void onClickSave(View view) {
         if (!songs.getSelectedItem().equals("")) {//проверку на есть ли елемент в спинере
