@@ -31,6 +31,7 @@ public class Activity2 extends AppCompatActivity {
         buttonSave = (Button) findViewById(R.id.buttonSave);
         buttonView = (Button) findViewById(R.id.buttonView);
         listView = (ListView)findViewById(R.id.listView);
+        songs = (Spinner) findViewById(R.id.songs);
 
         // реализация адаптера для Spiner зи Enum
         songs.setAdapter(new ArrayAdapter<Songs>(this, android.R.layout.simple_list_item_1, Songs.values()));
@@ -51,9 +52,9 @@ public class Activity2 extends AppCompatActivity {
                 }
             }
         });
-        // используем адаптер данных для наполнения аррай листа
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arraySongs);
-        listView.setAdapter(adapter);
+        // используем адаптер данных для наполнения аррай листа пока TODO не работает
+        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arraySongs);
+        //listView.setAdapter(adapter);
     }
 
     // обработка кнопки методом, вызывается из кнопки сохранить добавляет выбранную песню в лист
