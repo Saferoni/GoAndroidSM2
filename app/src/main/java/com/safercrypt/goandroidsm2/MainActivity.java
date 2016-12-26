@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         private TextView textViewInfo;
         private LinearLayout layoutLogin, layoutApp;
         private SharedPrefLogin sharedPrefLogin;
-    
+
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, Activity2.class));
-
+                Toast.makeText(getApplicationContext(), "Добро пожаловать в Концерт по заявкам", Toast.LENGTH_SHORT).show();
             }
         });
         buttonLogOut.setOnClickListener(new View.OnClickListener() {
