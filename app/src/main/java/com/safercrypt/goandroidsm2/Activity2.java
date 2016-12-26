@@ -15,7 +15,6 @@ import java.util.ArrayList;
 
 public class Activity2 extends AppCompatActivity {
 
-
     private TextView textView;
     private Button buttonSave, buttonView, buttonLogOutAll;
     private Spinner songs;
@@ -49,7 +48,8 @@ public class Activity2 extends AppCompatActivity {
                         arraySongs.add(songslist.get(i).toString());
                     }
                     Toast.makeText(getApplicationContext(), "Та на тебе лидеров список",Toast.LENGTH_SHORT).show();
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, arraySongs);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
+                            android.R.layout.simple_list_item_1, arraySongs);
                     listView.setAdapter(adapter);
                 }
                 else {
