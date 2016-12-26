@@ -56,13 +56,14 @@ public class Activity2 extends AppCompatActivity {
             }
         });
     }
-    
+
     // обработка кнопки методом, вызывается из кнопки сохранить добавляет выбранную песню в лист
     public void onClickSave(View view) {
         if (!songs.getSelectedItem().equals("")) {//проверку на есть ли елемент в спинере
             boolean truAdd = true;
             if (songslist.size() == 0) {
                 songslist.add(new SongsItem(songs.getSelectedItem().toString()));
+                truAdd = false;
             }else {
                 for (int i = 0; i < songslist.size(); i++){
                     if (songslist.get(i).getS().equals(songs.getSelectedItem().toString())) {
