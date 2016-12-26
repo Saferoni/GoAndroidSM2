@@ -40,6 +40,7 @@ public class Activity2 extends AppCompatActivity {
         buttonView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                listView.setAdapter(null);
                 if (songslist != null) {
                     //создаю аррайлист стрингов для вывода в листвию
                     for (int i = 0; i < songslist.size(); i++){
