@@ -20,7 +20,7 @@ public class Activity2 extends AppCompatActivity {
     private Spinner songs;
     private ArrayList<SongsItem> songslist = new ArrayList<>();
     private ListView listView;
-    private ArrayList<String> arraySongs;
+    private ArrayList<String> arraySongs = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ public class Activity2 extends AppCompatActivity {
         // реализация адаптера для Spiner зи Enum
         songs.setAdapter(new ArrayAdapter<Songs>(this, android.R.layout.simple_list_item_1, Songs.values()));
 
-        //обработка кнопки из лиснера
+        //обработка кнопки из лиснера по тображению лист вию
         buttonView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,7 +45,7 @@ public class Activity2 extends AppCompatActivity {
                     for (int i = 0; i < songslist.size(); i++){
                         arraySongs.add(songslist.get(i).toString());
                     }
-                    Toast.makeText(getApplicationContext(), "Та на тебе лидеров по прорядку",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Та на тебе лидеров список",Toast.LENGTH_SHORT).show();
                 }
                 else {
                     textView.setText("Заполните пожалуйста форму или сохраните");
@@ -53,8 +53,8 @@ public class Activity2 extends AppCompatActivity {
             }
         });
         // используем адаптер данных для наполнения аррай листа пока TODO не работает
-        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arraySongs);
-        //listView.setAdapter(adapter);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arraySongs);
+        listView.setAdapter(adapter);
     }
 
     // обработка кнопки методом, вызывается из кнопки сохранить добавляет выбранную песню в лист
