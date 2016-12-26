@@ -1,5 +1,6 @@
 package com.safercrypt.goandroidsm2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -16,11 +17,11 @@ public class Activity2 extends AppCompatActivity {
 
 
     private TextView textView;
-    private Button buttonSave, buttonView;
+    private Button buttonSave, buttonView, buttonLogOutAll;
     private Spinner songs;
-    private ArrayList<SongsItem> songslist = new ArrayList<>();
     private ListView listView;
     private ArrayList<String> arraySongs = new ArrayList<>();
+    private ArrayList<SongsItem> songslist = MainActivity.songslist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class Activity2 extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.textView);
         buttonSave = (Button) findViewById(R.id.buttonSave);
         buttonView = (Button) findViewById(R.id.buttonView);
+        buttonLogOutAll = (Button) findViewById(R.id.buttonLogOutAll);
         listView = (ListView)findViewById(R.id.listView);
         songs = (Spinner) findViewById(R.id.songs);
 
@@ -53,6 +55,15 @@ public class Activity2 extends AppCompatActivity {
                 else {
                     textView.setText("Заполните пожалуйста форму или сохраните");
                 }
+            }
+        });
+
+        buttonLogOutAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = (new Intent(Activity2.this, MainActivity.class));
+                intent.putExtra("logaut", 1);
+                startActivity(intent);
             }
         });
     }

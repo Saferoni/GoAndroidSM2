@@ -10,6 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 
 //Вариант№6. Концерт по заявкам
 //Разработать систему для формирования программы концерта по заявкам.
@@ -25,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         private TextView textViewInfo;
         private LinearLayout layoutLogin, layoutApp;
         private SharedPrefLogin sharedPrefLogin;
-
+        protected static ArrayList<SongsItem> songslist = new ArrayList<>();
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +46,22 @@ public class MainActivity extends AppCompatActivity {
 
             layoutApp.setVisibility(View.GONE);
             layoutLogin.setVisibility(View.GONE);
+            int logOutAll = getIntent().getIntExtra("logaut", 0);
 
             if (sharedPrefLogin.getFirstName().isEmpty()){
                 needLogin();
                 Toast.makeText(this, "Вы не вошли в систему", Toast.LENGTH_SHORT).show();
-            } else {
+            } else if(logOutAll == 1) {
+                layoutApp.setVisibility(View.GONE);
+                sharedPrefLogin.setFirstName("");
+                sharedPrefLogin.setLastName("");
+                needLogin();
+            }else {
                 isLogin();
             }
+
+            if(logOutAll == 1) needLogin();
+
         }
 
         //обработка логина
