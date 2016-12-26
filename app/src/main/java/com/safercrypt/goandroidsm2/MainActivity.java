@@ -3,56 +3,102 @@ package com.safercrypt.goandroidsm2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 // что нудно накидать
 //SheredPerf есть в 5 ДЗ
 
-//  адаптеры , ликствию,  Лиснеры  онТач,
+//Вариант№6. Концерт по заявкам
+//Разработать систему для формирования программы концерта по заявкам.
+// Пользователи (фанаты) регистрируются в системе и выбирают песни из предложенного списка ((*)
+// или добавляют свои). Каждый пользователь может выбрать любое количество песен. Когда время
+// подачи заявок оканчивается, формируется программа концерта, включающая песни, набравшие число
+// заявок не равное нулю.
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button button1,button2;
+        private Button buttonLogin, buttonLogOut,buttonGo;
+        private EditText editViewFirstName, editViewLastName;
+        private TextView textViewInfo;
+        private LinearLayout layoutLogin, layoutApp;
+        private SharedPrefLogin sharedPrefLogin;
+    
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
 
-        //иницализация кнопок
-        button1 = (Button) findViewById(R.id.button1);
-        button2 = (Button) findViewById(R.id.button2);
+            sharedPrefLogin = new SharedPrefLogin(this);
+            buttonGo = (Button) findViewById(R.id.buttonGo);
+            buttonLogin = (Button) findViewById(R.id.buttonLogin);
+            buttonLogOut = (Button) findViewById(R.id.buttonLogOut);
+            editViewFirstName = (EditText) findViewById(R.id.editViewFirstName);
+            editViewLastName = (EditText) findViewById(R.id.editViewLastName);
+            textViewInfo = (TextView) findViewById(R.id.textViewInfo);
+            layoutLogin = (LinearLayout) findViewById(R.id.layoutLogin);
+            layoutApp = (LinearLayout) findViewById(R.id.layoutApp);
 
-        // переход на другое активити
-        button1.setOnClickListener(new View.OnClickListener() {
+            layoutApp.setVisibility(View.GONE);
+            layoutLogin.setVisibility(View.GONE);
+
+            if (sharedPrefLogin.getFirstName().isEmpty()){
+                needLogin();
+                Toast.makeText(this, "Вы не вошли в систему", Toast.LENGTH_SHORT).show();
+            } else {
+                isLogin();
+            }
+        }
+        //обработка логина
+        public void needLogin(){
+            layoutLogin.setVisibility(View.VISIBLE);
+            editViewLastName.setText("");
+            editViewFirstName.setText("");
+            textViewInfo.setText("привет Залогинтесь");
+            buttonLogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (!editViewFirstName.getText().toString().equals("") &&
+                            !editViewLastName.getText().toString().equals("")) {
+                        sharedPrefLogin.setFirstName(editViewFirstName.getText().toString());
+                        sharedPrefLogin.setLastName(editViewLastName.getText().toString());
+                        layoutLogin.setVisibility(View.GONE);
+                        isLogin();
+                    } else {
+                        textViewInfo.setText("Вы не заполнили доно из полей, просьба заполнить");
+                    }
+                }
+            });
+        }
+    // Залогинениый пользователь
+    public void isLogin(){
+        layoutApp.setVisibility(View.VISIBLE);
+        textViewInfo.setText("Вы вошли как: " +
+                sharedPrefLogin.getFirstName() + " " +
+                sharedPrefLogin.getLastName());
+
+        buttonGo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, Activity2.class));
-                // пример реализации тоаст
-                Toast.makeText(getApplicationContext(), "Перехожу на другое активити", Toast.LENGTH_SHORT).show();
+
             }
         });
-
-        // вызов внешней активити и передача текста
-        button2.setOnClickListener(new View.OnClickListener() {
+        buttonLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent sendIntent = new Intent();
-                sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
-                sendIntent.setType("text/plain");
-                startActivity(sendIntent);
+                layoutApp.setVisibility(View.GONE);
+                sharedPrefLogin.setFirstName("");
+                sharedPrefLogin.setLastName("");
+                needLogin();
             }
         });
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d("SM2","Это onStart");
     }
 }
