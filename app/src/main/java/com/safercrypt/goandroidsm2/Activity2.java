@@ -46,6 +46,8 @@ public class Activity2 extends AppCompatActivity {
                         arraySongs.add(songslist.get(i).toString());
                     }
                     Toast.makeText(getApplicationContext(), "Та на тебе лидеров список",Toast.LENGTH_SHORT).show();
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, arraySongs);
+                    listView.setAdapter(adapter);
                 }
                 else {
                     textView.setText("Заполните пожалуйста форму или сохраните");
@@ -53,8 +55,8 @@ public class Activity2 extends AppCompatActivity {
             }
         });
         // используем адаптер данных для наполнения аррай листа пока TODO не работает
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arraySongs);
-        listView.setAdapter(adapter);
+        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arraySongs);
+        //listView.setAdapter(adapter);
     }
 
     // обработка кнопки методом, вызывается из кнопки сохранить добавляет выбранную песню в лист

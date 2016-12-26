@@ -35,7 +35,7 @@ public class SongsItem {
 
     @Override
     public String toString() {
-        return  i + " " + s + "\n";
+        return  i + " " + s ;
     }
 }
 
